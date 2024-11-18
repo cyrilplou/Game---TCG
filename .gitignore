@@ -1,0 +1,8 @@
+node_modules
+.env
+*.mp4
+images*
+citees.ejs
+lore.ejs
+plateau.ejs
+BDD.drawIO

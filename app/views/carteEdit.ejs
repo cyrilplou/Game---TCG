@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lore</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <%- include('./partials/header') %>
+    <section class="cardEditSection">
+        <form class="formCards" action="/cartes/edit/<%=card.id %>" method="post" >
+            <h3>Modifier une carte</h3>
+
+            <input oninput="displayCard()" type="text" value="<%= card.name %>" name="cardname" placeholder="Nom de la carte" class="cardName" id="cardName">
+            <select oninput="displayCard()" name="rarity" id="rarityForm" class="rarity">
+                <option value="<%=card.rarity  %>"><%= card.rarity %></option>
+                <option value="Commune">Commune</option>
+                <option value="Inhabituelle">Inhabituelle</option>
+                <option value="Rare">Rare</option>
+                <option value="Légendaire">Légendaire</option>
+                <option value="Corrompue du Nowhere"></option>
+            </select>
+            <div class="attpv">
+                <input type="number" value="<%= card.value_attaque %>" name="attaque" id="attaque" class="attaque" placeholder="Attaque" min="0" oninput="displayCard()">
+                <input type="number" name="defense" value="<%= card.value_defense %>" id="pv" class="pv" placeholder="PV" min="0" oninput="displayCard()">
+                <input type="number" name="cost" value="<%= card.cost %>" id="cout" class="cout" placeholder="Coût" min="0" oninput="displayCard()">
+            </div>
+            <textarea oninput="displayCard()" name="cardAptitudes" id="cardAptitudes" class="CardDescription" placeholder="Aptitudes"><%= card.aptitudes %></textarea>
+            <textarea oninput="displayCard()" name="cardDescription" id="descriptionForm" class="CardDescription" placeholder="Description"><%= card.description %></textarea>
+        
+            <!-- <input type="file" name="image"> -->
+            <button id="buttonFormCard">Mettre à jour</button>
+        </form>
+    </section>
+    <img class="mainImageCards" src="/images/castle.jpg" alt="">
+    
+
+
+</body>
+
+</html>
+

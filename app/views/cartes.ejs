@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les cartes</title>
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+    <%- include('./partials/header') %>
+    <section class="containerImageCard"><img class="mainImageCards" src="/images/castle.jpg" alt=""></section>
+    <section class="searchZone">
+        <form action="/cartes/name" method="get"><button>Trier par nom</button></form>
+    </section>
+
+
+    <section class="cardsPage">
+        <% cards.forEach(card => { %>
+            
+    <section class="cardDisplay" id="cardDisplay" >
+        <img src="/images/cards-img/embleme.webp" class="displayEmbleme" alt="">
+        <div class="headerCard">
+            <h4 class="displayCardTitle" id="displayCardTitle">&nbsp&nbsp<%= card.name %></h4><p class="displayCardCost" id="displayCardCost">Cout :<%= card.cost %></p>
+        </div>
+        <img src="<%= card.image%>" alt="" class="displayImgCard">
+        
+        <p class="displayCardType" id="displayCardType"><%= card.type %></p>
+        <p class="displayCardDescription" id="displayCardDescription"><%= card.aptitudes %> <br><i>
+            <%= card.description %></i></p>
+
+        <div class="displayFooterCard">
+            <p class="displayCardRarity" id="displayCardRarity"><%= card.rarity %></p>
+            <p class="displayCardPV" id="displayCardPV"><%= card.value_attaque %>/<%= card.value_defense %></p>
+           <form action="/cartes/<%= card.id %>" class="formEdit" ><button>Edit</button></form>  <form class="formsuppr" action="/delete/<%= card.id %>"><button>Suppr</button></form> 
+          
+        </div>
+    </section>
+    <% }) %>
+    </section>
+
+</body>
+
+</html>
+

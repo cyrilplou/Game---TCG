@@ -1,0 +1,48 @@
+<%- include('./partials/header') %>
+<section class="gameDisplay" id="playerDisplay">
+   <button id="startBTN" class="startBTN">Démarrer le jeu</button>
+<section class="caract" id="caract">
+   <div class="vosPV" id="zonePV" ><h2 id="vosPV"></h2></div>
+   <div class="vosmana" id="vosmana"><h2>Mana</h2></div>
+</section>
+</section>
+<section class="playerDisplay" >
+
+
+    <button id="pickCard" class="pickCard"><div class="clickdeck"><img class="magic" src="/images/cards-img/cardBack.jpg" alt=""></div><h2>Pioche</h2></button>
+    <section class="cardsPage2">
+
+    </section>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  socket.on('carte joué', (msg) => {
+            const playdisplay=document.getElementById('playerDisplay')
+            const carte = document.createElement('section');
+                carte.classList.add('gameHand');
+                carte.innerHTML=
+                  `
+                <img src="/images/cards-img/embleme.webp" class="gameCardEmbleme" alt="">
+                <div class="gameHeaderCard">
+                    <h4 class="gameTitleCard" id="displayCardTitle">&nbsp&nbsp ${msg.name}</h4><p class="displayCardCost" id="displayCardCost">Cout :${msg.cost}</p>
+                </div>
+                <img src="${msg.image}" alt="" class="gameHandCardImage">
+                
+                <p class="gameCardType" id="displayCardType">${msg.type}</p>
+                <p class="gameCardDescription" id="displayCardDescription">${msg.aptitudes} <br><i>
+                ${msg.description}</i></p>
+        
+                <div class="gamefootercard">
+                    <p class="gamecardrarity" id="displayCardRarity">${msg.rarity}</p>
+                    <p class="gameCardPV" id="displayCardPV">${msg.value_attaque}/${msg.value_defense}</p>
+                  
+                </div>`
+                
+            playdisplay.appendChild(carte);
+            window.scrollTo(0, document.body.scrollHeight);
+          });
+</script>
+
+

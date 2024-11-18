@@ -1,0 +1,101 @@
+
+<!-- Formulaire d'ajout de carte Ressource-->
+<form class="formCards" action="/" method="post" >
+    <h3>Ajout d'une carte Sort</h3>
+    <select name="city" id="cityForm" class="city"oninput="displayCardBorder()">
+        <option value="">Choisir une cité</option>
+        <option value="1">Cité d'Arvergn</option>
+        <option value="2">Cité sombre</option>
+        <option value="666">Toutes les cités</option>
+    </select>
+    <input oninput="displayCard()" type="text" name="cardname" placeholder="Nom de la carte" class="cardName" id="cardName">
+    <select oninput="displayCard()" name="cardType" id="cardType" class="cardType">
+        <option value="Soldat">Soldat</option>
+        <option value="Mercenaire">Mercenaire</option>
+        <option value="tower">TD</option>
+
+
+    </select>
+    <select oninput="displayCard()" name="rarity" id="rarityForm" class="rarity">
+        <option value="Commune">Commune</option>
+        <option value="Inhabituelle">Inhabituelle</option>
+        <option value="Rare">Rare</option>
+        <option value="Légendaire">Légendaire</option>
+        <option value="Corrompue du Nowhere">Corrompue du Nowhere</option>
+    </select>
+    <div class="attpv">
+        <input type="number" name="attaque" id="attaque" class="attaque" placeholder="Attaque" min="0" oninput="displayCard()">
+        <input type="number" name="defense" id="pv" class="pv" placeholder="PV" min="0" oninput="displayCard()">
+        <input type="number" name="cost" id="cout" class="cout" placeholder="Coût" min="0" oninput="displayCard()">
+
+    </div>
+    <textarea oninput="displayCard()" name="cardAptitudes" id="cardAptitudes" class="CardDescription" placeholder="Aptitudes"></textarea>
+    <textarea oninput="displayCard()" name="cardDescription" id="descriptionForm" class="CardDescription" placeholder="Description"></textarea>
+
+    <!-- <input type="file" name="image"> -->
+    <button id="buttonFormCard">Créer la carte</button>
+</form>
+<!-- Section affichage carte avant envoie -->
+
+<section class="cardDisplay" id="cardDisplay">
+    <img src="/images/cards-img/embleme.webp" class="displayEmbleme" alt="">
+    <h4 class="displayCardTitle" id="displayCardTitle"></h4>
+    <img src="/images/cards-img/Soldat.webp" alt="" class="displayImgCard">
+    
+    <p class="displayCardType" id="displayCardType"></p>
+    <p class="displayCardDescription" id="displayCardDescription"></p>
+    <div class="displayFooterCard">
+        <p class="displayCardRarity" id="displayCardRarity"></p>
+        <p class="displayCardPV" id="displayCardPV"></p>
+    </div>
+</section>
+<!-- Récupération des donnéese et envoie au Display -->
+<script>
+    function displayCard(){
+        const title = document.getElementById("cardName").value
+        document.getElementById("displayCardTitle").innerHTML=  `&nbsp ${title}`;
+
+        const rarity = document.getElementById("rarityForm").value
+        document.getElementById("displayCardRarity").textContent = rarity
+
+        const description = document.getElementById("descriptionForm").value
+        const aptitudes = document.getElementById("cardAptitudes").value
+        const descriptionformate = `<i> &nbsp${description.replace(/\n/g, "<br>")}</i>`;
+        const aptitudesformate = aptitudes.replace(/\n/g, "<br>");
+        document.getElementById("displayCardDescription").innerHTML = aptitudesformate + '<br>' + descriptionformate
+   
+        const PV = document.getElementById("pv").value.toString()
+        const attaque = document.getElementById("attaque").value.toString()
+        document.getElementById("displayCardPV").textContent = `${attaque}/${PV}`
+
+        const cardType = document.getElementById("cardType").value
+        document.getElementById("displayCardType").textContent = cardType
+        
+    }
+    const card = document.getElementById("cardDisplay")
+
+    function displayCardBorder(){
+        const city = document.getElementById("cityForm").value
+        console.log(city)
+        if(city==='Cité verte'){
+            card.classList.add("cardDisplayVert")
+            card.classList.remove("cardDisplayBrown")
+
+        }
+        else{
+            card.classList.add("cardDisplayBrown")
+            card.classList.remove("cardDisplayVert")
+
+        }
+    }
+    const button = document.getElementById("buttonFormCard");
+
+    button.addEventListener('mouseenter',()=>{
+        card.classList.add("cardOver")
+    })
+    button.addEventListener('mouseleave',()=>{
+        card.classList.remove("cardOver")
+    })
+
+    
+</script>
